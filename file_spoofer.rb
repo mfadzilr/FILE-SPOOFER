@@ -45,7 +45,7 @@ when 'docx'
 when 'ppt'
   options[:icon] = "powerpoint.ico"
   options[:spoof_ext] = "ppt"
-when 'pptx-orange'
+when 'pptx'
   options[:icon] = "PowerPoint-orange.ico"
   options[:spoof_ext] = "pptx"
 else

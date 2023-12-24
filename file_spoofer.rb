@@ -60,6 +60,9 @@ if File.exists?(options[:input])
   else
     options[:output] = filename + "." + options[:fake_ext] + "." + extension
   end
+else
+  puts "[!] Input file not found"
+  exit
 end
 
 if options[:output] && options[:input] && options[:icon]

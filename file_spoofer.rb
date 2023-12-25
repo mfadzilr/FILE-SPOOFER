@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# mind1355[at]gmail[dot]com
+# Muhamad Fadzil : mind1355[at]gmail[dot]com
 # File spoofer
 require 'optparse'
 
@@ -16,17 +16,13 @@ OptionParser.new do |opts|
     options[:output] = output
   end
 
-  opts.on("-e", "--ext flash, pdf, xlsx, ppt, pptx, doc, docx", "file extension") do |ext|
+  opts.on("-e", "--ext png, pdf, xlsx, ppt, pptx, doc, docx", "file extension") do |ext|
     options[:ext] = ext
   end
 
   opts.on("-t", "--type share, usb", "file stored type") do |type|
     options[:type] = type
   end
-
-  # opts.on("-f", "--fake", "fake file extension") do
-  #   options[:fake] = true
-  # end
 
 end.parse!
 
@@ -68,7 +64,7 @@ if File.exists?(options[:input])
   when 'usb'
     options[:output] = filename + "." + options[:fake_ext] + "." + extension
   else
-    puts "[!] Type not found."
+    puts "[!] Type file not found."
     exit
   end
 else

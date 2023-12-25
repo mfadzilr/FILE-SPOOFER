@@ -34,6 +34,9 @@ p options
 p ARGV
 
 case options[:ext]
+when 'png'
+  options[:icon] = "image.ico"
+  options[:fake_ext] = "png"
 when 'pdf'
   options[:icon] = "acrobat.ico"
   options[:fake_ext] = "pdf"

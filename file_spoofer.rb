@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# mind1355[at]gmail[dot]com
+# Muhamad Fadzil : mind1355[at]gmail[dot]com
 # File spoofer
 require 'optparse'
 
@@ -16,12 +16,12 @@ OptionParser.new do |opts|
     options[:output] = output
   end
 
-  opts.on("-e", "--ext flash, pdf, xlsx, ppt, pptx, doc, docx", "file extension") do |ext|
+  opts.on("-e", "--ext png, pdf, xlsx, ppt, pptx, doc, docx", "file extension") do |ext|
     options[:ext] = ext
   end
 
-  opts.on("-f", "--fake", "fake file extension") do
-    options[:fake] = true
+  opts.on("-t", "--type share, usb", "file stored type") do |type|
+    options[:type] = type
   end
 
 end.parse!
@@ -30,6 +30,9 @@ p options
 p ARGV
 
 case options[:ext]
+when 'png'
+  options[:icon] = "image.ico"
+  options[:fake_ext] = "png"
 when 'pdf'
   options[:icon] = "acrobat.ico"
   options[:fake_ext] = "pdf"
@@ -49,19 +52,23 @@ when 'pptx'
   options[:icon] = "PowerPoint-orange.ico"
   options[:fake_ext] = "pptx"
 else
-  puts "[!] Extension not supported"
+  puts "[!] Extension not supported."
   exit
 end
 
 if File.exists?(options[:input])
   filename, extension = options[:output].split('.')
-  if options[:fake]
+  case options[:type]
+  when 'share'
     options[:output] = filename + "\u202E" + options[:fake_ext].reverse! + "." + extension
-  else
+  when 'usb'
     options[:output] = filename + "." + options[:fake_ext] + "." + extension
+  else
+    puts "[!] Type file not found."
+    exit
   end
 else
-  puts "[!] Input file not found"
+  puts "[!] Input file not found."
   exit
 end
 
